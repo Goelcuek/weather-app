@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="now">Şimdi</string>
+    <string name="today">Bugün</string>
+    <string name="hourly">SAATLİK TAHMİN</string>
+    <string name="daily">7 GÜNLÜK TAHMİN</string>
+    <string name="feels_like">Hissedilen</string>
+    <string name="humidity">Nem</string>
+    <string name="wind">Rüzgâr</string>
+    <string name="uv">UV indeksi</string>
+    <string name="sunrise">Gün doğumu</string>
+    <string name="sunset">Gün batımı</string>
+    <string name="km_h">%1$d km/sa</string>
+    <string name="pct">%%%1$d</string>
+    <string name="extra_line">Hissedilen %1$s · Nem %2$s</string>
+    <string name="updated">Güncellendi %1$s · Open-Meteo</string>
+    <string name="offline">Yenilenemedi — son veriler gösteriliyor</string>
+    <string name="loading">Hava durumu yükleniyor…</string>
+    <string name="error_retry">Hava durumu alınamadı.\nTekrar denemek için dokunun.</string>
+    <string name="tap_to_setup">Kurmak için dokunun</string>
+    <string name="my_location">Konumum</string>
+    <string name="choose_location">Konum seç</string>
+    <string name="search_city">Şehir ara</string>
+    <string name="use_my_location">Mevcut konumumu kullan</string>
+    <string name="settings">Ayarlar</string>
+    <string name="widget_style">WIDGET STİLİ</string>
+    <string name="style_dynamic">Dinamik</string>
+    <string name="style_dark">Koyu</string>
+    <string name="style_light">Açık</string>
+    <string name="units">SICAKLIK BİRİMİ</string>
+    <string name="add_widget">ANA EKRANA WIDGET EKLE</string>
+    <string name="pin_unsupported">Ana ekrana uzun basın → Widget\'lar → Hava.</string>
+    <string name="battery_tip">Honor için ipucu: widget\'ların düzenli güncellenmesi için Ayarlar → Pil → Uygulama başlatma → Hava → Manuel yönet\'i seçip otomatik başlatma ve arka planda çalışmaya izin verin.</string>
+
+    <string name="w_small">Mini 2×2</string>
+    <string name="w_compact">Şerit 4×1</string>
+    <string name="w_hourly">Saatlik 4×2</string>
+    <string name="w_large">Geniş 4×4</string>
+    <string name="w_small_desc">Anlık sıcaklık ve durum</string>
+    <string name="w_compact_desc">Şimdi ve sonraki saatler tek satırda</string>
+    <string name="w_hourly_desc">Şimdi ve 6 saatlik tahmin, sıcaklık eğrisiyle</string>
+    <string name="w_large_desc">Saatlik eğri ve 5 günlük tahmin</string>
+    <string name="preview_place">İstanbul</string>
+
+    <string name="c_clear">Açık</string>
+    <string name="c_mainly_clear">Çoğunlukla açık</string>
+    <string name="c_partly">Parçalı bulutlu</string>
+    <string name="c_overcast">Bulutlu</string>
+    <string name="c_fog">Sisli</string>
+    <string name="c_drizzle">Çisenti</string>
+    <string name="c_freezing_drizzle">Dondurucu çisenti</string>
+    <string name="c_rain_light">Hafif yağmur</string>
+    <string name="c_rain">Yağmurlu</string>
+    <string name="c_rain_heavy">Şiddetli yağmur</string>
+    <string name="c_freezing_rain">Dondurucu yağmur</string>
+    <string name="c_snow_light">Hafif kar</string>
+    <string name="c_snow">Karlı</string>
+    <string name="c_snow_heavy">Yoğun kar</string>
+    <string name="c_showers">Sağanak</string>
+    <string name="c_snow_showers">Kar sağanağı</string>
+    <string name="c_thunder">Gök gürültülü fırtına</string>
+    <string name="c_hail">Dolu ve fırtına</string>
+</resources>
