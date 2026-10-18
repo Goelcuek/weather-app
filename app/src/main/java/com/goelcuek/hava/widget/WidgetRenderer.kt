@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import android.widget.RemoteViews
 import com.goelcuek.hava.MainActivity
 import com.goelcuek.hava.R
@@ -43,6 +44,27 @@ object WidgetRenderer {
         }
         val rv = RemoteViews(ctx.packageName, layout)
         rv.setInt(R.id.root, "setBackgroundResource", p.bg)
+
+        val density = ctx.resources.displayMetrics.density
+        val opts = mgr.getAppWidgetOptions(id)
+        val minW = opts.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
+        val maxH = opts.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT)
+
+        if (store.widgetStyle == "glass") {
+            // Portrait size: min width x max height.
+            val (defW, defH) = when (kind) {
+                WidgetKind.SMALL -> 160 to 160
+                WidgetKind.COMPACT -> 340 to 80
+                WidgetKind.HOURLY -> 340 to 170
+                WidgetKind.LARGE -> 340 to 340
+            }
+            val wDp = if (minW > 0) minW else defW
+            val hDp = if (maxH > 0) maxH else defH
+            rv.setViewVisibility(R.id.glass, View.VISIBLE)
+            rv.setImageViewBitmap(R.id.glass, Charts.glass(wDp, hDp, density))
+        } else {
+            rv.setViewVisibility(R.id.glass, View.GONE)
+        }
         rv.setOnClickPendingIntent(R.id.root, openApp(ctx))
         rv.setTextColor(R.id.place, p.text)
         rv.setTextColor(R.id.temp, p.text)
@@ -63,10 +85,6 @@ object WidgetRenderer {
         rv.setImageViewResource(R.id.icon, WeatherCodes.icon(snap.code, snap.isDay))
         rv.setTextViewText(R.id.cond, ctx.getString(WeatherCodes.label(snap.code)))
         rv.setTextViewText(R.id.hilo, today?.let { "${it.max.deg()} / ${it.min.deg()}" } ?: "")
-
-        val density = ctx.resources.displayMetrics.density
-        val opts = mgr.getAppWidgetOptions(id)
-        val minW = opts.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
 
         when (kind) {
             WidgetKind.SMALL -> Unit

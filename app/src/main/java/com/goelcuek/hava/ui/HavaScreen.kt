@@ -305,7 +305,7 @@ fun GlassCard(content: @Composable ColumnScope.() -> Unit) {
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
             .background(GlassSheen)
-            .border(1.dp, GlassRim, RoundedCornerShape(24.dp))
+            .border(0.75.dp, GlassRim, RoundedCornerShape(24.dp))
             .padding(16.dp),
         content = content,
     )
@@ -483,7 +483,7 @@ private fun Tile(title: String, value: String, modifier: Modifier) {
         modifier
             .clip(RoundedCornerShape(20.dp))
             .background(GlassSheen)
-            .border(1.dp, GlassRim, RoundedCornerShape(20.dp))
+            .border(0.75.dp, GlassRim, RoundedCornerShape(20.dp))
             .padding(16.dp)
     ) {
         Text(title, fontSize = 13.sp, color = Sub)
