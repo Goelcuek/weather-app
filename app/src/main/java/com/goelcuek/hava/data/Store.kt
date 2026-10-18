@@ -28,9 +28,9 @@ class Store(ctx: Context) {
         get() = p.getString("unit", "c") ?: "c"
         set(v) = p.edit().putString("unit", v).apply()
 
-    /** "dynamic", "dark" or "light" */
+    /** "glass", "dynamic", "dark" or "light" */
     var widgetStyle: String
-        get() = p.getString("style", "dynamic") ?: "dynamic"
+        get() = p.getString("style", "glass") ?: "glass"
         set(v) = p.edit().putString("style", v).apply()
 
     var cachedJson: String?

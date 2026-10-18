@@ -20,6 +20,7 @@ import com.goelcuek.hava.data.pct
 private data class WPalette(val bg: Int, val text: Int, val sub: Int, val accent: Int, val track: Int)
 
 private fun palette(style: String, sky: Sky): WPalette = when (style) {
+    "glass" -> WPalette(R.drawable.bg_glass, 0xFFFFFFFF.toInt(), 0xE0FFFFFF.toInt(), 0xFFFFFFFF.toInt(), 0x40FFFFFF)
     "dark" -> WPalette(R.drawable.bg_dark, 0xFFFFFFFF.toInt(), 0x99FFFFFF.toInt(), 0xFFFFB547.toInt(), 0x33FFFFFF)
     "light" -> WPalette(R.drawable.bg_light, 0xFF1C1C1E.toInt(), 0xFF86868B.toInt(), 0xFFFF8A1F.toInt(), 0x1F000000)
     else -> WPalette(sky.widgetBg, 0xFFFFFFFF.toInt(), 0xCCFFFFFF.toInt(), 0xFFFFFFFF.toInt(), 0x40FFFFFF)

@@ -11,6 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
+        android:shadowColor="#59000000"
+        android:shadowDy="1"
+        android:shadowRadius="3"
         android:textColor="#CCFFFFFF"
         android:textSize="11sp" />
 
@@ -28,6 +31,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:maxLines="1"
+        android:shadowColor="#59000000"
+        android:shadowDy="1"
+        android:shadowRadius="3"
         android:textColor="#FFFFFFFF"
         android:textSize="13sp" />
 </LinearLayout>

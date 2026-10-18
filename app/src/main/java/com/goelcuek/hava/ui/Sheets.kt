@@ -172,7 +172,15 @@ fun SettingsSheet(
             Text(stringResource(R.string.settings), fontSize = 20.sp, fontWeight = FontWeight.Medium)
 
             Label(stringResource(R.string.widget_style))
-            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                StyleChip(
+                    stringResource(R.string.style_glass), style == "glass",
+                    Brush.linearGradient(
+                        listOf(Color(0xFF3A6F8C), Color(0xFF8A6A4A), Color(0xFF6F7880)),
+                    ),
+                    Modifier.weight(1f),
+                    glass = true,
+                ) { onStyle("glass") }
                 StyleChip(
                     stringResource(R.string.style_dynamic), style == "dynamic",
                     Brush.linearGradient(listOf(Color(0xFF2E7FE8), Color(0xFF5CC2F2))), Modifier.weight(1f),
@@ -255,7 +263,14 @@ private fun Label(text: String) {
 }
 
 @Composable
-private fun StyleChip(label: String, selected: Boolean, brush: Brush, modifier: Modifier, onClick: () -> Unit) {
+private fun StyleChip(
+    label: String,
+    selected: Boolean,
+    brush: Brush,
+    modifier: Modifier,
+    glass: Boolean = false,
+    onClick: () -> Unit,
+) {
     Column(
         modifier
             .clip(RoundedCornerShape(16.dp))
@@ -270,8 +285,22 @@ private fun StyleChip(label: String, selected: Boolean, brush: Brush, modifier: 
                 .height(54.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .background(brush)
-                .border(1.dp, Color.White.copy(alpha = 0.12f), RoundedCornerShape(12.dp))
-        )
+                .border(1.dp, Color.White.copy(alpha = 0.12f), RoundedCornerShape(12.dp)),
+            contentAlignment = Alignment.Center,
+        ) {
+            if (glass) {
+                // Mini glass pane on a "wallpaper" swatch
+                Box(
+                    Modifier
+                        .fillMaxWidth(0.72f)
+                        .height(30.dp)
+                        .clip(RoundedCornerShape(9.dp))
+                        .background(Color(0x4D26262B))
+                        .background(Brush.verticalGradient(listOf(Color(0x3DFFFFFF), Color(0x08FFFFFF))))
+                        .border(1.dp, GlassRim, RoundedCornerShape(9.dp))
+                )
+            }
+        }
         Spacer(Modifier.height(6.dp))
         Text(label, fontSize = 13.sp, color = if (selected) Color.White else Muted)
     }

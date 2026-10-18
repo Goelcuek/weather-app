@@ -12,6 +12,9 @@
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
         android:maxLines="1"
+        android:shadowColor="#59000000"
+        android:shadowDy="1"
+        android:shadowRadius="3"
         android:textColor="#CCFFFFFF"
         android:textSize="10sp" />
 
@@ -30,6 +33,9 @@
         android:fontFamily="sans-serif-medium"
         android:includeFontPadding="false"
         android:maxLines="1"
+        android:shadowColor="#59000000"
+        android:shadowDy="1"
+        android:shadowRadius="3"
         android:textColor="#FFFFFFFF"
         android:textSize="12sp" />
 </LinearLayout>

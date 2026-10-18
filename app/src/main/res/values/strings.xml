@@ -25,6 +25,7 @@
     <string name="use_my_location">Use my current location</string>
     <string name="settings">Settings</string>
     <string name="widget_style">WIDGET STYLE</string>
+    <string name="style_glass">Glass</string>
     <string name="style_dynamic">Dynamic</string>
     <string name="style_dark">Dark</string>
     <string name="style_light">Light</string>

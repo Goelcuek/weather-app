@@ -26,6 +26,9 @@
         android:fontFamily="sans-serif-light"
         android:includeFontPadding="false"
         android:text="21°"
+        android:shadowColor="#59000000"
+        android:shadowDy="1"
+        android:shadowRadius="3"
         android:textColor="#FFFFFFFF"
         android:textSize="30sp" />
 
@@ -44,6 +47,9 @@
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:text="@string/preview_place"
+            android:shadowColor="#59000000"
+            android:shadowDy="1"
+            android:shadowRadius="3"
             android:textColor="#FFFFFFFF"
             android:textSize="13sp" />
 
@@ -54,6 +60,9 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/c_partly"
+            android:shadowColor="#59000000"
+            android:shadowDy="1"
+            android:shadowRadius="3"
             android:textColor="#CCFFFFFF"
             android:textSize="11sp" />
 
@@ -63,6 +72,9 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="24° / 15°"
+            android:shadowColor="#59000000"
+            android:shadowDy="1"
+            android:shadowRadius="3"
             android:textColor="#CCFFFFFF"
             android:textSize="11sp" />
     </LinearLayout>

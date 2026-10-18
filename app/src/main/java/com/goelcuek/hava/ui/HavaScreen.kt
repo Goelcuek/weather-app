@@ -9,6 +9,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -87,6 +88,19 @@ import kotlin.math.roundToInt
 val Glass = Color.White.copy(alpha = 0.14f)
 val Sub = Color.White.copy(alpha = 0.72f)
 val RainBlue = Color(0xFF9ED2FF)
+
+/** Specular rim: bright top-left, faint middle, soft reflection bottom-right. */
+val GlassRim = Brush.linearGradient(
+    listOf(
+        Color.White.copy(alpha = 0.65f),
+        Color.White.copy(alpha = 0.08f),
+        Color.White.copy(alpha = 0.06f),
+        Color.White.copy(alpha = 0.35f),
+    )
+)
+private val GlassSheen = Brush.verticalGradient(
+    listOf(Color.White.copy(alpha = 0.22f), Color.White.copy(alpha = 0.08f), Color.White.copy(alpha = 0.12f))
+)
 
 @Composable
 fun HavaScreen(vm: MainVM = viewModel()) {
@@ -290,7 +304,8 @@ fun GlassCard(content: @Composable ColumnScope.() -> Unit) {
         Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
-            .background(Glass)
+            .background(GlassSheen)
+            .border(1.dp, GlassRim, RoundedCornerShape(24.dp))
             .padding(16.dp),
         content = content,
     )
@@ -467,7 +482,8 @@ private fun Tile(title: String, value: String, modifier: Modifier) {
     Column(
         modifier
             .clip(RoundedCornerShape(20.dp))
-            .background(Glass)
+            .background(GlassSheen)
+            .border(1.dp, GlassRim, RoundedCornerShape(20.dp))
             .padding(16.dp)
     ) {
         Text(title, fontSize = 13.sp, color = Sub)

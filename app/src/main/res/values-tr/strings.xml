@@ -24,6 +24,7 @@
     <string name="use_my_location">Mevcut konumumu kullan</string>
     <string name="settings">Ayarlar</string>
     <string name="widget_style">WIDGET STİLİ</string>
+    <string name="style_glass">Cam</string>
     <string name="style_dynamic">Dinamik</string>
     <string name="style_dark">Koyu</string>
     <string name="style_light">Açık</string>

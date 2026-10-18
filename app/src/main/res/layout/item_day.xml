@@ -14,6 +14,9 @@
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="1"
+        android:shadowColor="#59000000"
+        android:shadowDy="1"
+        android:shadowRadius="3"
         android:textColor="#FFFFFFFF"
         android:textSize="13sp" />
 
@@ -29,6 +32,9 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:maxLines="1"
+        android:shadowColor="#59000000"
+        android:shadowDy="1"
+        android:shadowRadius="3"
         android:textColor="#FF7CC4FF"
         android:textSize="11sp" />
 
@@ -38,6 +44,9 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:maxLines="1"
+        android:shadowColor="#59000000"
+        android:shadowDy="1"
+        android:shadowRadius="3"
         android:textColor="#CCFFFFFF"
         android:textSize="13sp" />
 
@@ -56,6 +65,9 @@
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:maxLines="1"
+        android:shadowColor="#59000000"
+        android:shadowDy="1"
+        android:shadowRadius="3"
         android:textColor="#FFFFFFFF"
         android:textSize="13sp" />
 </LinearLayout>
