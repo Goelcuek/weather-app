@@ -90,7 +90,7 @@ object Charts {
         val sheen = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             shader = LinearGradient(
                 0f, 0f, 0f, h.toFloat(),
-                intArrayOf(a(0.13f), a(0.05f), a(0.015f), a(0.04f)),
+                intArrayOf(a(0.05f), a(0.02f), a(0.0f), a(0.015f)),
                 floatArrayOf(0f, 0.35f, 0.7f, 1f),
                 Shader.TileMode.CLAMP,
             )
@@ -103,7 +103,7 @@ object Charts {
             strokeWidth = 5f * scale
             maskFilter = android.graphics.BlurMaskFilter(2f * scale, android.graphics.BlurMaskFilter.Blur.NORMAL)
         }
-        drawLitRoundRect(c, RectF(0f, 0f, w.toFloat(), h.toFloat()), r, glow, 0.45f)
+        drawLitRoundRect(c, RectF(0f, 0f, w.toFloat(), h.toFloat()), r, glow, 0.15f)
         c.restore()
 
         // Hairline rim.
@@ -124,7 +124,7 @@ object Charts {
         val dot = kotlin.math.cos(Math.toRadians(thetaDeg - 225.0))
         val pos = if (dot > 0) dot * dot else 0.0
         val neg = if (dot < 0) dot * dot else 0.0
-        return ((0.10 + 0.62 * pos + 0.30 * neg) * k).toFloat()
+        return ((0.16 + 0.40 * pos + 0.18 * neg) * k).toFloat()
     }
 
     /**
