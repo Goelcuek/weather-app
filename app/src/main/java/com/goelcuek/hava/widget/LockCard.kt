@@ -27,7 +27,8 @@ import com.goelcuek.hava.data.hourLabel
  * using the same icons and hourly strip as the home-screen widgets.
  */
 object LockCard {
-    private const val CHANNEL = "lock_weather"
+    private const val CHANNEL = "lock_weather_v2"
+    private const val OLD_CHANNEL = "lock_weather"
     private const val ID = 7001
 
     fun canPost(ctx: Context): Boolean =
@@ -49,9 +50,13 @@ object LockCard {
         val today = w.today()
 
         val nm = ctx.getSystemService(NotificationManager::class.java)
+        // The first channel was IMPORTANCE_LOW, which Android files under "Silent" and many
+        // phones (MagicOS included) hide from the lock screen. Importance can't be raised on an
+        // existing channel, so replace it with a DEFAULT one that still has no sound or vibration.
+        if (nm.getNotificationChannel(OLD_CHANNEL) != null) nm.deleteNotificationChannel(OLD_CHANNEL)
         if (nm.getNotificationChannel(CHANNEL) == null) {
             nm.createNotificationChannel(
-                NotificationChannel(CHANNEL, ctx.getString(R.string.lock_channel), NotificationManager.IMPORTANCE_LOW).apply {
+                NotificationChannel(CHANNEL, ctx.getString(R.string.lock_channel), NotificationManager.IMPORTANCE_DEFAULT).apply {
                     description = ctx.getString(R.string.lock_channel_desc)
                     setShowBadge(false)
                     enableVibration(false)
@@ -108,11 +113,10 @@ object LockCard {
             .setContentIntent(open)
             .setOngoing(true)
             .setOnlyAlertOnce(true)
-            .setSilent(true)
             .setShowWhen(false)
             .setLocalOnly(true)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setCategory(NotificationCompat.CATEGORY_STATUS)
             .build()
 
