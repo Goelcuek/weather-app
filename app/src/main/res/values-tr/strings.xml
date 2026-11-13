@@ -61,4 +61,9 @@
     <string name="c_snow_showers">Kar sağanağı</string>
     <string name="c_thunder">Gök gürültülü fırtına</string>
     <string name="c_hail">Dolu ve fırtına</string>
+    <string name="lock_screen">KİLİT EKRANI</string>
+    <string name="lock_card">Kilit ekranında hava durumu</string>
+    <string name="lock_card_desc">Kilit ekranında sonraki saatleri gösteren sessiz bir hava kartı gösterir.</string>
+    <string name="lock_channel">Kilit ekranı hava durumu</string>
+    <string name="lock_channel_desc">Anlık ve saatlik hava durumunu gösteren sessiz kart</string>
 </resources>

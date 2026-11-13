@@ -28,6 +28,7 @@ data class UiState(
     val style: String = "dynamic",
     val useGps: Boolean = true,
     val updatedAt: Long = 0L,
+    val lockCard: Boolean = false,
 )
 
 class MainVM(app: Application) : AndroidViewModel(app) {
@@ -56,7 +57,14 @@ class MainVM(app: Application) : AndroidViewModel(app) {
         style = store.widgetStyle,
         useGps = store.useGps,
         updatedAt = store.lastFetch,
+        lockCard = store.lockCard,
     )
+
+    fun setLockCard(on: Boolean) {
+        store.lockCard = on
+        _state.value = _state.value.copy(lockCard = on)
+        com.goelcuek.hava.widget.LockCard.update(getApplication())
+    }
 
     fun refresh(allowLocation: Boolean = true) {
         viewModelScope.launch {

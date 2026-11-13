@@ -1,7 +1,14 @@
 package com.goelcuek.hava.ui
 
+import android.Manifest
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import com.goelcuek.hava.widget.LockCard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -151,11 +158,16 @@ fun SettingsSheet(
     unit: String,
     onStyle: (String) -> Unit,
     onUnit: (String) -> Unit,
+    lockCard: Boolean,
+    onLockCard: (Boolean) -> Unit,
     onDismiss: () -> Unit,
 ) {
     val ctx = LocalContext.current
     val mgr = remember { AppWidgetManager.getInstance(ctx) }
     val canPin = remember { runCatching { mgr.isRequestPinAppWidgetSupported }.getOrDefault(false) }
+    val notifPerm = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        onLockCard(granted)
+    }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -211,6 +223,34 @@ fun SettingsSheet(
                             .padding(horizontal = 26.dp, vertical = 8.dp)
                     ) { Text(label, fontSize = 15.sp, fontWeight = FontWeight.Medium) }
                 }
+            }
+
+            Label(stringResource(R.string.lock_screen))
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(14.dp))
+                    .background(Color.White.copy(alpha = 0.08f))
+                    .clickable {
+                        if (!lockCard && !LockCard.canPost(ctx) && Build.VERSION.SDK_INT >= 33) {
+                            notifPerm.launch(Manifest.permission.POST_NOTIFICATIONS)
+                        } else {
+                            onLockCard(!lockCard)
+                        }
+                    }
+                    .padding(horizontal = 14.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(R.string.lock_card), fontSize = 15.sp)
+                    Text(stringResource(R.string.lock_card_desc), fontSize = 12.sp, color = Muted, lineHeight = 16.sp)
+                }
+                Spacer(Modifier.width(10.dp))
+                Switch(
+                    checked = lockCard,
+                    onCheckedChange = null,
+                    colors = SwitchDefaults.colors(checkedTrackColor = Accent),
+                )
             }
 
             Label(stringResource(R.string.add_widget))

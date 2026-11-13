@@ -54,6 +54,11 @@ object WidgetUpdater {
         providers.forEach { (kind, cls) ->
             mgr.getAppWidgetIds(ComponentName(ctx, cls)).forEach { update(ctx, mgr, it, kind) }
         }
+        try {
+            LockCard.update(ctx)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     fun update(ctx: Context, mgr: AppWidgetManager, id: Int, kind: WidgetKind) {

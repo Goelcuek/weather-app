@@ -33,6 +33,10 @@ class Store(ctx: Context) {
         get() = p.getString("style", "glass") ?: "glass"
         set(v) = p.edit().putString("style", v).apply()
 
+    var lockCard: Boolean
+        get() = p.getBoolean("lock_card", false)
+        set(v) = p.edit().putBoolean("lock_card", v).apply()
+
     var cachedJson: String?
         get() = p.getString("json", null)
         set(v) = p.edit().putString("json", v).apply()

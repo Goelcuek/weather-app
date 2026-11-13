@@ -208,6 +208,8 @@ fun HavaScreen(vm: MainVM = viewModel()) {
                     unit = st.unit,
                     onStyle = vm::setStyle,
                     onUnit = vm::setUnit,
+                    lockCard = st.lockCard,
+                    onLockCard = vm::setLockCard,
                     onDismiss = { showSettings = false },
                 )
             }

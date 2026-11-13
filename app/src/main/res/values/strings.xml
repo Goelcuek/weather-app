@@ -62,4 +62,9 @@
     <string name="c_snow_showers">Snow showers</string>
     <string name="c_thunder">Thunderstorm</string>
     <string name="c_hail">Thunderstorm, hail</string>
+    <string name="lock_screen">LOCK SCREEN</string>
+    <string name="lock_card">Weather on lock screen</string>
+    <string name="lock_card_desc">Shows a silent weather card with the next hours on your lock screen.</string>
+    <string name="lock_channel">Lock screen weather</string>
+    <string name="lock_channel_desc">Silent card with current and hourly weather</string>
 </resources>
