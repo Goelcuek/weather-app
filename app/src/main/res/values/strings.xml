@@ -71,6 +71,6 @@
     <string name="w_clock">Clock 4×2</string>
     <string name="w_clock_large">Clock + hourly 4×3</string>
     <string name="w_clock_strip_desc">Time, date and current weather in one line</string>
-    <string name="w_clock_desc">Big clock with date and today's weather</string>
-    <string name="w_clock_large_desc">Big clock, today's weather and the next hours</string>
+    <string name="w_clock_desc">Big clock with date and today\'s weather</string>
+    <string name="w_clock_large_desc">Big clock, today\'s weather and the next hours</string>
 </resources>
