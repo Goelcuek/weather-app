@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <ImageView
+        android:id="@+id/glass"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no"
+        android:scaleType="fitXY"
+        android:tint="#FFFFFFFF"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="6dp">
+
+        <TextClock
+            android:id="@+id/clock"
+            android:format12Hour="h:mm"
+            android:format24Hour="HH:mm"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="120sp"
+            android:autoSizeMinTextSize="40sp"
+            android:autoSizeStepGranularity="2sp"
+            android:shadowColor="#80000000"
+            android:shadowDy="1"
+            android:shadowRadius="6"
+            android:textColor="#FFFFFFFF" />
+
+        <TextClock
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:format12Hour="EEEE, d MMMM"
+            android:format24Hour="EEEE, d MMMM"
+            android:includeFontPadding="false"
+            android:letterSpacing="0.03"
+            android:maxLines="1"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:shadowColor="#80000000"
+            android:shadowDy="1"
+            android:shadowRadius="6"
+            android:textColor="#FFFFFFFF"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:id="@+id/weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:text="@string/preview_place"
+                    android:maxWidth="150dp"
+                    android:shadowColor="#80000000"
+                    android:shadowDy="1"
+                    android:shadowRadius="6"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="22sp" />
+                <TextView
+                    android:id="@+id/cond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:text="@string/c_partly"
+                    android:layout_marginTop="3dp"
+                    android:maxWidth="150dp"
+                    android:shadowColor="#80000000"
+                    android:shadowDy="1"
+                    android:shadowRadius="6"
+                    android:textColor="#F2FFFFFF"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_w_sun" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:text="15°"
+                    android:shadowColor="#80000000"
+                    android:shadowDy="1"
+                    android:shadowRadius="6"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="26sp" />
+                <TextView
+                    android:id="@+id/hilo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:text="27° / 15°"
+                    android:layout_marginTop="3dp"
+                    android:shadowColor="#80000000"
+                    android:shadowDy="1"
+                    android:shadowRadius="6"
+                    android:textColor="#F2FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

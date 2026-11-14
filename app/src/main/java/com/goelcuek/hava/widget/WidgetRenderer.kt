@@ -34,13 +34,22 @@ object WidgetRenderer {
         val w = Repo.cached(ctx)
         val snap = w?.snapshot()
         val sky = snap?.let { WeatherCodes.sky(it.code, it.isDay) } ?: Sky.CLEAR_DAY
-        val p = palette(store.widgetStyle, sky)
+        val isClock = kind == WidgetKind.CLOCK_STRIP || kind == WidgetKind.CLOCK || kind == WidgetKind.CLOCK_LARGE
+        // Clock widgets sit straight on the wallpaper, like the MagicOS lock-screen clock.
+        val p = if (isClock) {
+            WPalette(android.R.color.transparent, 0xFFFFFFFF.toInt(), 0xF2FFFFFF.toInt(), 0xFFFFFFFF.toInt(), 0x40FFFFFF)
+        } else {
+            palette(store.widgetStyle, sky)
+        }
 
         val layout = when (kind) {
             WidgetKind.SMALL -> R.layout.widget_small
             WidgetKind.COMPACT -> R.layout.widget_compact
             WidgetKind.HOURLY -> R.layout.widget_hourly
             WidgetKind.LARGE -> R.layout.widget_large
+            WidgetKind.CLOCK_STRIP -> R.layout.widget_clock_strip
+            WidgetKind.CLOCK -> R.layout.widget_clock
+            WidgetKind.CLOCK_LARGE -> R.layout.widget_clock_large
         }
         val rv = RemoteViews(ctx.packageName, layout)
         rv.setInt(R.id.root, "setBackgroundResource", p.bg)
@@ -50,13 +59,13 @@ object WidgetRenderer {
         val minW = opts.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
         val maxH = opts.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT)
 
-        if (store.widgetStyle == "glass") {
+        if (store.widgetStyle == "glass" && !isClock) {
             // Portrait size: min width x max height.
             val (defW, defH) = when (kind) {
                 WidgetKind.SMALL -> 160 to 160
                 WidgetKind.COMPACT -> 340 to 80
                 WidgetKind.HOURLY -> 340 to 170
-                WidgetKind.LARGE -> 340 to 340
+                else -> 340 to 340
             }
             val wDp = if (minW > 0) minW else defW
             val hDp = if (maxH > 0) maxH else defH
@@ -66,6 +75,11 @@ object WidgetRenderer {
             rv.setViewVisibility(R.id.glass, View.GONE)
         }
         rv.setOnClickPendingIntent(R.id.root, openApp(ctx))
+        if (isClock) {
+            val alarms = openAlarms(ctx)
+            rv.setOnClickPendingIntent(R.id.clock, alarms)
+            rv.setOnClickPendingIntent(R.id.date, alarms)
+        }
         rv.setTextColor(R.id.place, p.text)
         rv.setTextColor(R.id.temp, p.text)
         rv.setTextColor(R.id.cond, p.sub)
@@ -87,7 +101,11 @@ object WidgetRenderer {
         rv.setTextViewText(R.id.hilo, today?.let { "${it.max.deg()} / ${it.min.deg()}" } ?: "")
 
         when (kind) {
-            WidgetKind.SMALL -> Unit
+            WidgetKind.SMALL, WidgetKind.CLOCK_STRIP, WidgetKind.CLOCK -> Unit
+            WidgetKind.CLOCK_LARGE -> {
+                fillHours(ctx, rv, w, 6, R.layout.item_hour, p)
+                drawCurve(rv, w, 6, (if (minW > 0) minW else 300) - 20, 14, density, p)
+            }
             WidgetKind.COMPACT -> fillHours(ctx, rv, w, 4, R.layout.item_hour_mini, p)
             WidgetKind.HOURLY -> {
                 fillHours(ctx, rv, w, 6, R.layout.item_hour, p)
@@ -113,6 +131,13 @@ object WidgetRenderer {
         val i = Intent(ctx, MainActivity::class.java)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         return PendingIntent.getActivity(ctx, 0, i, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+    }
+
+    /** Tapping the time opens the phone's clock/alarms app; falls back to Hava. */
+    private fun openAlarms(ctx: Context): PendingIntent {
+        val i = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        if (i.resolveActivity(ctx.packageManager) == null) return openApp(ctx)
+        return PendingIntent.getActivity(ctx, 2, i, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
     private fun fillHours(ctx: Context, rv: RemoteViews, w: Weather, count: Int, itemLayout: Int, p: WPalette) {

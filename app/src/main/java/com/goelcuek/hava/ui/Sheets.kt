@@ -260,6 +260,9 @@ fun SettingsSheet(
                     WidgetKind.COMPACT to R.string.w_compact,
                     WidgetKind.HOURLY to R.string.w_hourly,
                     WidgetKind.LARGE to R.string.w_large,
+                    WidgetKind.CLOCK_STRIP to R.string.w_clock_strip,
+                    WidgetKind.CLOCK to R.string.w_clock,
+                    WidgetKind.CLOCK_LARGE to R.string.w_clock_large,
                 )
                 names.chunked(2).forEach { row ->
                     Row(

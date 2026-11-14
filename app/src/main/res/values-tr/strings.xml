@@ -66,4 +66,10 @@
     <string name="lock_card_desc">Kilit ekranında sonraki saatleri gösteren sessiz bir hava kartı gösterir.</string>
     <string name="lock_channel">Kilit ekranı hava durumu</string>
     <string name="lock_channel_desc">Anlık ve saatlik hava durumunu gösteren sessiz kart</string>
+    <string name="w_clock_strip">Saat şerit 4×1</string>
+    <string name="w_clock">Saat 4×2</string>
+    <string name="w_clock_large">Saat + saatlik 4×3</string>
+    <string name="w_clock_strip_desc">Saat, tarih ve anlık hava tek satırda</string>
+    <string name="w_clock_desc">Büyük saat, tarih ve bugünün havası</string>
+    <string name="w_clock_large_desc">Büyük saat, bugünün havası ve sonraki saatler</string>
 </resources>

@@ -67,4 +67,10 @@
     <string name="lock_card_desc">Shows a silent weather card with the next hours on your lock screen.</string>
     <string name="lock_channel">Lock screen weather</string>
     <string name="lock_channel_desc">Silent card with current and hourly weather</string>
+    <string name="w_clock_strip">Clock strip 4×1</string>
+    <string name="w_clock">Clock 4×2</string>
+    <string name="w_clock_large">Clock + hourly 4×3</string>
+    <string name="w_clock_strip_desc">Time, date and current weather in one line</string>
+    <string name="w_clock_desc">Big clock with date and today's weather</string>
+    <string name="w_clock_large_desc">Big clock, today's weather and the next hours</string>
 </resources>

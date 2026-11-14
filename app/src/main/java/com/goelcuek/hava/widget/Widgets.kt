@@ -7,7 +7,7 @@ import android.content.Context
 import android.os.Bundle
 import com.goelcuek.hava.data.Store
 
-enum class WidgetKind { SMALL, COMPACT, HOURLY, LARGE }
+enum class WidgetKind { SMALL, COMPACT, HOURLY, LARGE, CLOCK_STRIP, CLOCK, CLOCK_LARGE }
 
 abstract class BaseWidget(private val kind: WidgetKind) : AppWidgetProvider() {
 
@@ -40,6 +40,9 @@ class SmallWidget : BaseWidget(WidgetKind.SMALL)
 class CompactWidget : BaseWidget(WidgetKind.COMPACT)
 class HourlyWidget : BaseWidget(WidgetKind.HOURLY)
 class LargeWidget : BaseWidget(WidgetKind.LARGE)
+class ClockStripWidget : BaseWidget(WidgetKind.CLOCK_STRIP)
+class ClockWidget : BaseWidget(WidgetKind.CLOCK)
+class ClockLargeWidget : BaseWidget(WidgetKind.CLOCK_LARGE)
 
 object WidgetUpdater {
     val providers: Map<WidgetKind, Class<*>> = mapOf(
@@ -47,6 +50,9 @@ object WidgetUpdater {
         WidgetKind.COMPACT to CompactWidget::class.java,
         WidgetKind.HOURLY to HourlyWidget::class.java,
         WidgetKind.LARGE to LargeWidget::class.java,
+        WidgetKind.CLOCK_STRIP to ClockStripWidget::class.java,
+        WidgetKind.CLOCK to ClockWidget::class.java,
+        WidgetKind.CLOCK_LARGE to ClockLargeWidget::class.java,
     )
 
     fun updateAll(ctx: Context) {

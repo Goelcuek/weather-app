@@ -8,6 +8,13 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- So clock widgets can open the phone's alarms app when the time is tapped -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SHOW_ALARMS" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -73,6 +80,39 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_large_info" />
+        </receiver>
+        <receiver
+            android:name=".widget.ClockStripWidget"
+            android:exported="true"
+            android:label="@string/w_clock_strip">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_clock_strip_info" />
+        </receiver>
+        <receiver
+            android:name=".widget.ClockWidget"
+            android:exported="true"
+            android:label="@string/w_clock">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_clock_info" />
+        </receiver>
+        <receiver
+            android:name=".widget.ClockLargeWidget"
+            android:exported="true"
+            android:label="@string/w_clock_large">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_clock_large_info" />
         </receiver>
         <receiver
             android:name=".widget.BootReceiver"
