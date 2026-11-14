@@ -40,10 +40,24 @@
   map.createPane("labelsPane").style.zIndex = 450;
   map.getPane("labelsPane").style.pointerEvents = "none";
 
-  const CARTO = "https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}{r}.png";
-  L.tileLayer(CARTO, { style: "dark_nolabels", subdomains: "abcd", maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>' }).addTo(map);
-  L.tileLayer(CARTO, { style: "dark_only_labels", subdomains: "abcd", maxZoom: 19, pane: "labelsPane" }).addTo(map);
+  // Base map. CARTO started requiring an API key (Aug 2026), so use Esri's keyless dark-grey
+  // canvas (served until 2029) and fall back to darkened OpenStreetMap tiles if Esri fails.
+  const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/{name}/MapServer/tile/{z}/{y}/{x}";
+  const esriBase = L.tileLayer(ESRI, { name: "World_Dark_Gray_Base", maxNativeZoom: 16, maxZoom: 19,
+    attribution: "&copy; Esri, HERE, Garmin, &copy; OpenStreetMap" }).addTo(map);
+  const esriLabels = L.tileLayer(ESRI, { name: "World_Dark_Gray_Reference", maxNativeZoom: 16, maxZoom: 19,
+    pane: "labelsPane" }).addTo(map);
+  let baseOk = 0, baseErr = 0, fellBack = false;
+  esriBase.on("tileload", () => baseOk++);
+  esriBase.on("tileerror", () => {
+    if (++baseErr >= 4 && baseOk === 0 && !fellBack) {
+      fellBack = true;
+      map.removeLayer(esriBase);
+      map.removeLayer(esriLabels);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-dark",
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+    }
+  });
 
   L.marker([LAT, LON], { icon: L.divIcon({ className: "", html: '<div class="me"></div>', iconSize: [16, 16] }), interactive: false })
     .addTo(map);
