@@ -5,4 +5,10 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
+    <style name="Theme.Hava.Radar" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/radar_bg</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+    <color name="radar_bg">#FF111318</color>
 </resources>

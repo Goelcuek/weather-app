@@ -73,4 +73,6 @@
     <string name="w_clock_strip_desc">Time, date and current weather in one line</string>
     <string name="w_clock_desc">Big clock with date and today\'s weather</string>
     <string name="w_clock_large_desc">Big clock, today\'s weather and the next hours</string>
+    <string name="radar_title">Radar &amp; wind map</string>
+    <string name="radar_sub">Rain radar, wind and temperature</string>
 </resources>

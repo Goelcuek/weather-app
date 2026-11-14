@@ -34,6 +34,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".RadarActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false"
+            android:theme="@style/Theme.Hava.Radar" />
+
         <receiver
             android:name=".widget.SmallWidget"
             android:exported="true"

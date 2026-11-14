@@ -58,6 +58,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -177,6 +178,8 @@ fun HavaScreen(vm: MainVM = viewModel()) {
                     } else {
                         Hero(w)
                         Spacer(Modifier.height(20.dp))
+                        RadarCard()
+                        Spacer(Modifier.height(12.dp))
                         GlassCard {
                             SectionTitle(stringResource(R.string.hourly))
                             HourlyRow(w.upcomingHours(24))
@@ -297,6 +300,35 @@ private fun Hero(w: Weather) {
                 color = Sub,
             )
         }
+    }
+}
+
+@Composable
+private fun RadarCard() {
+    val ctx = LocalContext.current
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(24.dp))
+            .background(GlassSheen)
+            .border(0.75.dp, GlassRim, RoundedCornerShape(24.dp))
+            .clickable { ctx.startActivity(android.content.Intent(ctx, com.goelcuek.hava.RadarActivity::class.java)) }
+            .padding(horizontal = 16.dp, vertical = 14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Image(painterResource(R.drawable.ic_radar), contentDescription = null, modifier = Modifier.size(30.dp))
+        Spacer(Modifier.width(14.dp))
+        Column(Modifier.weight(1f)) {
+            Text(stringResource(R.string.radar_title), fontSize = 16.sp, fontWeight = FontWeight.Medium)
+            Text(stringResource(R.string.radar_sub), fontSize = 13.sp, color = Sub)
+        }
+        Icon(
+            Icons.Filled.KeyboardArrowDown,
+            contentDescription = null,
+            modifier = Modifier
+                .size(22.dp)
+                .graphicsLayer(rotationZ = -90f),
+        )
     }
 }
 

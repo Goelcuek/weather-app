@@ -72,4 +72,6 @@
     <string name="w_clock_strip_desc">Saat, tarih ve anlık hava tek satırda</string>
     <string name="w_clock_desc">Büyük saat, tarih ve bugünün havası</string>
     <string name="w_clock_large_desc">Büyük saat, bugünün havası ve sonraki saatler</string>
+    <string name="radar_title">Radar ve rüzgâr haritası</string>
+    <string name="radar_sub">Yağış radarı, rüzgâr ve sıcaklık</string>
 </resources>

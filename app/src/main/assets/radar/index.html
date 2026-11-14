@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Hava Radar</title>
+<link rel="stylesheet" href="leaflet.css">
+<link rel="stylesheet" href="radar.css">
+</head>
+<body>
+<div id="map"></div>
+<iframe id="windy" title="Windy" allow="fullscreen"></iframe>
+
+<div id="top">
+  <button id="close" class="glass round" aria-label="Close">
+    <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+  </button>
+  <div id="layers" class="glass">
+    <button data-layer="radar" class="on">Radar</button>
+    <button data-layer="wind">Wind</button>
+    <button data-layer="temp">Temp</button>
+    <button data-layer="windy">Windy</button>
+  </div>
+</div>
+
+<button id="locate" class="glass round" aria-label="My location">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" /><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3" /><circle cx="12" cy="12" r="7" /></svg>
+</button>
+
+<div id="panel" class="glass">
+  <div id="row">
+    <button id="play" class="round" aria-label="Play">
+      <svg id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" /></svg>
+      <svg id="i-pause" viewBox="0 0 24 24"><path d="M7.5 5.5h3v13h-3zM13.5 5.5h3v13h-3z" /></svg>
+    </button>
+    <div id="slide">
+      <div id="tlabel">—</div>
+      <input id="time" type="range" min="0" max="0" value="0" step="1">
+    </div>
+  </div>
+  <div id="legend"><div id="lbar"></div><div id="lticks"></div></div>
+  <div id="status"></div>
+</div>
+
+<script src="leaflet.js"></script>
+<script src="radar.js"></script>
+</body>
+</html>
