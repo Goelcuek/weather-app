@@ -57,24 +57,43 @@ object Api {
         return out
     }
 
+    /**
+     * City/town name for a coordinate. Tries the phone's geocoder first, then two free web
+     * services, so a missing or empty system geocoder (common on some ROMs) still gives a name.
+     */
     fun reverseName(ctx: Context, lat: Double, lon: Double): String? {
+        val lang = Locale.getDefault().language
         if (Geocoder.isPresent()) {
             try {
                 @Suppress("DEPRECATION")
                 val a = Geocoder(ctx, Locale.getDefault()).getFromLocation(lat, lon, 1)?.firstOrNull()
-                val n = a?.locality ?: a?.subAdminArea ?: a?.adminArea
-                if (!n.isNullOrBlank()) return n
+                val n = listOf(a?.locality, a?.subAdminArea, a?.adminArea).firstOrNull { !it.isNullOrBlank() }
+                if (n != null) return n
             } catch (_: Exception) {
             }
+        }
+        try {
+            val o = JSONObject(
+                get(
+                    "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=$lat&longitude=$lon" +
+                        "&localityLanguage=$lang"
+                )
+            )
+            val n = listOf("city", "locality", "principalSubdivision").map { o.optString(it) }.firstOrNull { it.isNotBlank() }
+            if (n != null) return n
+        } catch (_: Exception) {
         }
         return try {
             val o = JSONObject(
                 get(
-                    "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=$lat&longitude=$lon" +
-                        "&localityLanguage=" + Locale.getDefault().language
+                    "https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&lat=$lat&lon=$lon" +
+                        "&accept-language=$lang"
                 )
             )
-            listOf("locality", "city", "principalSubdivision").map { o.optString(it) }.firstOrNull { it.isNotBlank() }
+            val ad = o.optJSONObject("address")
+            listOf("city", "town", "village", "county", "province", "state")
+                .map { ad?.optString(it).orEmpty() }
+                .firstOrNull { it.isNotBlank() }
         } catch (_: Exception) {
             null
         }

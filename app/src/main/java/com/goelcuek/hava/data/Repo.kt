@@ -24,14 +24,23 @@ object Repo {
                 if (s.useGps && allowLocation) {
                     val loc = LocationHelper.current(app)
                     if (loc != null) {
-                        val moved = !s.hasLocation || s.placeName.isBlank() || distance(s.lat, s.lon, loc) > 1500f
+                        // Re-resolve the name when we moved, or when we only have the generic
+                        // "My location" placeholder because an earlier lookup failed.
+                        val generic = s.placeName.isBlank() || s.placeName == app.getString(R.string.my_location)
+                        val moved = !s.hasLocation || generic || distance(s.lat, s.lon, loc) > 1500f
                         s.lat = loc.latitude
                         s.lon = loc.longitude
                         if (moved) {
-                            s.placeName = Api.reverseName(app, loc.latitude, loc.longitude)
-                                ?: s.placeName.ifBlank { app.getString(R.string.my_location) }
+                            val name = Api.reverseName(app, loc.latitude, loc.longitude)
+                            s.placeName = name ?: s.placeName.ifBlank { app.getString(R.string.my_location) }
                         }
                     }
+                }
+                // Still only the placeholder (no fresh fix, or lookup failed)? Name the saved spot.
+                if (s.useGps && s.hasLocation &&
+                    (s.placeName.isBlank() || s.placeName == app.getString(R.string.my_location))
+                ) {
+                    Api.reverseName(app, s.lat, s.lon)?.let { s.placeName = it }
                 }
                 if (!s.hasLocation) s.setLocation(41.0082, 28.9784, "İstanbul")
                 if (s.placeName.isBlank()) s.placeName = app.getString(R.string.my_location)
